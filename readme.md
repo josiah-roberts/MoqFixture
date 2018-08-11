@@ -65,6 +65,8 @@ public class UserInfoController : ApiController
 }
 ```
 
+In this example, all fixtures testing objects with an `ISomeType` dependency will have a preconfigured mock.
+
 ## Limitations
 
 `MoqFixture` cannot mock dependencies where there is ambiguity. This includes:

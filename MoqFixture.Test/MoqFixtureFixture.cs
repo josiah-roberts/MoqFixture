@@ -7,26 +7,7 @@ namespace MoqFixture.Test
     [TestClass]
     public class MoqFixtureFixture
     {
-        [TestMethod]
-        public void Runs_Global_Fixture_Config()
-        {
-            var expectedObject = new Object();
-
-            DefaultMocks.AddSetup(f =>
-            {
-                f.Mock<DependencyOne>()
-                    .Setup(x => x.GetObject(It.IsAny<Object>()))
-                    .Returns(expectedObject);
-
-                f.Mock<Object>();
-            });
-
-            var fixture = new ValidFixture();
-
-            Assert.AreEqual(expectedObject, fixture.GetMock<DependencyOne>().Object.GetObject(new Object()));
-        }
-
-        [TestMethod]
+       [TestMethod]
         public void Throws_Exception_If_Type_Consumes_Primative()
         {
             Assert.ThrowsException<InvalidOperationException>(() => new PrimativeFixture());
@@ -79,6 +60,11 @@ namespace MoqFixture.Test
 
     class ValidFixture : MoqFixture<ValidType>
     {
+        public ValidFixture()
+        {
+            TestObject.ToString();
+        }
+        
         public void AskForWrongMock()
         {
             Mock<IConvertible>();
@@ -92,27 +78,42 @@ namespace MoqFixture.Test
 
     class DuplicateFixture : MoqFixture<Duplicate>
     {
-
+        public DuplicateFixture()
+        {
+            TestObject.ToString();
+        }
     }
 
     class MultiFixture : MoqFixture<Multi>
     {
-
+        public MultiFixture()
+        {
+            TestObject.ToString();
+        }
     }
 
     class PrimativeFixture : MoqFixture<TakesPrimative>
     {
-
+        public PrimativeFixture()
+        {
+            TestObject.ToString();
+        }
     }
 
     class SealedFixture : MoqFixture<TakesSealed>
     {
-
+        public SealedFixture()
+        {
+            TestObject.ToString();
+        }
     }
 
     class ConstructorExceptionFixture : MoqFixture<ConstructorException>
     {
-
+        public ConstructorExceptionFixture()
+        {
+            TestObject.ToString();
+        }
     }
 
     public class ConstructorException
